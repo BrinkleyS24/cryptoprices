@@ -1,21 +1,26 @@
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Currencies from "./pages/Currencies";
 import Main from "./pages/Main";
 import Price from "./pages/Price";
-import './App.css';
+import Nav from "./components/Nav";
+import './index.css';
+
 
 function App() {
   return (
     <div className="App">
-      <Route path="/">
-        <Main />
-      </Route>
-      <Route path="/currencies">
-        <Currencies />
-      </Route>
-      <Route path="/prices">
-        <Price />
-      </Route>
+      <Nav />
+      <Switch>
+        <Route exact path="/">
+          <Main />
+        </Route>
+        <Route path="/currencies">
+          <Currencies />
+        </Route>
+        <Route
+          path="/price/:symbol" render={(routerProps) => <Price {...routerProps} />}
+        />
+      </Switch>
     </div>
   );
 }
